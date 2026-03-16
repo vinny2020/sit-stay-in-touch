@@ -1,0 +1,69 @@
+package com.xaymaca.sit.ui.groups
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.xaymaca.sit.data.model.Contact
+import com.xaymaca.sit.data.model.ContactGroup
+import com.xaymaca.sit.data.model.GroupWithContacts
+import com.xaymaca.sit.data.repository.ContactRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class GroupViewModel @Inject constructor(
+    private val contactRepository: ContactRepository
+) : ViewModel() {
+
+    val groups: StateFlow<List<ContactGroup>> = contactRepository
+        .getAllGroups()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    val groupsWithContacts: StateFlow<List<GroupWithContacts>> = contactRepository
+        .getAllGroupsWithContacts()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    val allContacts: StateFlow<List<Contact>> = contactRepository
+        .getAllContacts()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    fun createGroup(name: String, emoji: String) {
+        viewModelScope.launch {
+            contactRepository.insertGroup(
+                ContactGroup(name = name.trim(), emoji = emoji.trim().ifBlank { "👥" })
+            )
+        }
+    }
+
+    fun updateGroup(group: ContactGroup) {
+        viewModelScope.launch {
+            contactRepository.updateGroup(group)
+        }
+    }
+
+    fun deleteGroup(group: ContactGroup) {
+        viewModelScope.launch {
+            contactRepository.deleteGroup(group)
+        }
+    }
+
+    fun addMember(contactId: Long, groupId: Long) {
+        viewModelScope.launch {
+            contactRepository.addContactToGroup(contactId, groupId)
+        }
+    }
+
+    fun removeMember(contactId: Long, groupId: Long) {
+        viewModelScope.launch {
+            contactRepository.removeContactFromGroup(contactId, groupId)
+        }
+    }
+
+    suspend fun getGroupById(id: Long): ContactGroup? = contactRepository.getGroupById(id)
+
+    suspend fun getGroupWithContacts(id: Long): GroupWithContacts? =
+        contactRepository.getGroupWithContacts(id)
+}

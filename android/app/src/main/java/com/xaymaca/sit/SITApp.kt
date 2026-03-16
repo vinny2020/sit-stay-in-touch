@@ -1,0 +1,48 @@
+package com.xaymaca.sit
+
+import android.app.Application
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import androidx.hilt.work.HiltWorkerFactory
+import androidx.work.Configuration
+import dagger.hilt.android.HiltAndroidApp
+import javax.inject.Inject
+
+@HiltAndroidApp
+class SITApp : Application(), Configuration.Provider {
+
+    @Inject
+    lateinit var workerFactory: HiltWorkerFactory
+
+    override val workManagerConfiguration: Configuration
+        get() = Configuration.Builder()
+            .setWorkerFactory(workerFactory)
+            .build()
+
+    override fun onCreate() {
+        super.onCreate()
+        createNotificationChannel()
+    }
+
+    private fun createNotificationChannel() {
+        val channel = NotificationChannel(
+            TICKLE_CHANNEL_ID,
+            "Tickle Reminders",
+            NotificationManager.IMPORTANCE_DEFAULT
+        ).apply {
+            description = "Reminders to stay in touch with your network"
+        }
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
+    }
+
+    companion object {
+        const val TICKLE_CHANNEL_ID = "tickle_channel"
+        const val PREFS_NAME = "sit_prefs"
+        const val KEY_SEND_SMS_DIRECTLY = "send_sms_directly"
+        const val KEY_ONBOARDING_COMPLETE = "onboarding_complete"
+        const val TICKLE_WORK_TAG = "tickle_daily_check"
+    }
+}
