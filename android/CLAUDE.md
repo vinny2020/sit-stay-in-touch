@@ -2,104 +2,158 @@
 
 ## What This Is
 Native Android implementation of SIT (Stay in Touch). Kotlin, Jetpack Compose, Room database.
-Feature parity with the iOS app. See root `CLAUDE.md` for shared brand tokens.
+Full feature parity with iOS. See root `CLAUDE.md` for shared brand tokens.
 
 ## Architecture — MVVM + Repository
 - **UI**: Jetpack Compose (no XML layouts)
 - **State**: ViewModel + StateFlow
-- **Persistence**: Room (equivalent to iOS SwiftData)
+- **Persistence**: Room (version 2) + TypeConverters for List<String>
 - **DI**: Hilt
-- **Min SDK**: 26 (Android 8.0)
-- **Target SDK**: 35
+- **Navigation**: Navigation Compose (NavGraph.kt)
+- **Background work**: WorkManager (TickleWorker)
+- **Min SDK**: 26 (Android 8.0) · **Target SDK**: 35
 
 ## Project Structure
 
 ```
 app/src/main/java/com/xaymaca/sit/
+├── SITApp.kt                       # @HiltAndroidApp, PREFS_NAME, KEY_ONBOARDING_COMPLETE
+├── MainActivity.kt                 # Entry point, NavGraph host
 ├── data/
-│   ├── model/          # Room @Entity classes
-│   │   ├── Contact.kt
-│   │   ├── ContactGroup.kt
-│   │   ├── MessageTemplate.kt
-│   │   └── TickleReminder.kt
-│   └── repository/     # Repository classes (data access layer)
+│   ├── model/
+│   │   ├── Contact.kt              # Room @Entity
+│   │   ├── ContactGroup.kt         # Room @Entity
+│   │   ├── ContactGroupCrossRef.kt # Many-to-many join table
+│   │   ├── MessageTemplate.kt      # Room @Entity
+│   │   ├── TickleReminder.kt       # Room @Entity
+│   │   ├── Enums.kt                # ImportSource, TickleFrequency, TickleStatus
+│   │   └── Relations.kt            # ContactWithGroups, GroupWithContacts
+│   ├── dao/
+│   │   ├── ContactDao.kt
+│   │   ├── ContactGroupDao.kt
+│   │   ├── MessageTemplateDao.kt
+│   │   └── TickleReminderDao.kt
+│   ├── db/
+│   │   └── SITDatabase.kt          # Room DB, version 2, StringListConverter
+│   └── repository/
 │       ├── ContactRepository.kt
+│       ├── MessageTemplateRepository.kt
 │       └── TickleRepository.kt
+├── di/
+│   └── DatabaseModule.kt           # Hilt module — provides DB and DAOs
 ├── service/
-│   ├── ContactImportService.kt   # ContactsContract import
-│   ├── LinkedInCSVParser.kt      # CSV parsing
-│   ├── SmsService.kt             # SmsManager direct send OR Intent fallback
-│   └── TickleScheduler.kt        # WorkManager recurring reminders
+│   ├── ContactImportService.kt     # ContactsContract import
+│   ├── LinkedInCSVParser.kt        # CSV parsing (mirrors iOS implementation)
+│   ├── SmsService.kt               # SmsManager direct send + Intent fallback
+│   ├── StringListConverter.kt      # Room TypeConverter for List<String>
+│   ├── TickleScheduler.kt          # nextDueDate logic + WorkManager scheduling
+│   └── TickleWorker.kt             # WorkManager Worker for notifications
 ├── ui/
-│   ├── theme/          # Compose theme (Pulse colors, typography)
-│   │   ├── Color.kt
-│   │   ├── Theme.kt
-│   │   └── Type.kt
-│   ├── network/        # Contact list + detail screens
-│   ├── tickle/         # Tickle list + edit screens
-│   ├── compose/        # Message compose screen
-│   ├── onboarding/     # First-run import flow
-│   └── settings/       # Settings screen
-└── SITApp.kt           # @HiltAndroidApp Application class
+│   ├── theme/
+│   │   ├── Color.kt                # Navy, Cobalt, Amber + variants
+│   │   ├── Theme.kt                # SITTheme (dark-first, Material3)
+│   │   └── Type.kt                 # Typography
+│   ├── nav/
+│   │   ├── NavGraph.kt             # Full NavHost + BottomNavigation
+│   │   └── Screen.kt              # Sealed class for all routes
+│   ├── launch/
+│   │   └── LaunchScreen.kt
+│   ├── onboarding/
+│   │   ├── OnboardingScreen.kt
+│   │   └── ImportScreen.kt
+│   ├── network/
+│   │   ├── NetworkListScreen.kt    # Searchable contact list
+│   │   ├── NetworkViewModel.kt
+│   │   ├── ContactDetailScreen.kt
+│   │   └── AddContactScreen.kt     # Create + edit (reused with contactId param)
+│   ├── groups/
+│   │   ├── GroupListScreen.kt
+│   │   ├── GroupDetailScreen.kt
+│   │   └── GroupViewModel.kt
+│   ├── tickle/
+│   │   ├── TickleListScreen.kt     # Due/Upcoming/Snoozed sections
+│   │   ├── TickleEditScreen.kt
+│   │   └── TickleViewModel.kt
+│   ├── compose/
+│   │   ├── ComposeScreen.kt
+│   │   └── ComposeViewModel.kt
+│   ├── settings/
+│   │   ├── SettingsScreen.kt
+│   │   └── SettingsViewModel.kt
+│   └── shared/
+│       └── TagChipRow.kt
+└── tests/
+    ├── LinkedInCSVParserTest.kt    # Unit tests — passing
+    ├── StringListConverterTest.kt  # Unit tests — passing
+    └── TickleSchedulerTest.kt      # Unit tests — passing
 ```
 
-## Room Models (mirror iOS SwiftData models)
 
-### Contact
-`id: Long`, `firstName`, `lastName`, `phoneNumbers: String (JSON)`,
-`emails: String (JSON)`, `company`, `jobTitle`, `notes`,
-`tags: String (JSON)`, `importSource: String`, `createdAt: Long`, `lastContactedAt: Long?`
+## What's Complete ✅ — Full Android Feature Set
 
-### ContactGroup
-`id: Long`, `name`, `emoji`
+- Room database — all 5 entities, 4 DAOs, StringListConverter, version 2
+- Hilt DI — DatabaseModule providing all repositories
+- Compose theme — Navy/Cobalt/Amber Pulse identity, dark-first Material3
+- Full NavGraph — 5-tab bottom nav + all nested routes with proper back stack
+- `NetworkListScreen` — searchable contact list
+- `ContactDetailScreen` — full detail view with tickle shortcut
+- `AddContactScreen` — create + edit (reused via contactId param)
+- `GroupListScreen` + `GroupDetailScreen`
+- `TickleListScreen` — Due/Upcoming/Snoozed sections
+- `TickleEditScreen` — create/edit with contact/group picker, frequency, date, note
+- `TickleScheduler` — nextDueDate logic + WorkManager scheduling
+- `TickleWorker` — WorkManager Worker for background notifications
+- `ComposeScreen` + `ComposeViewModel` — multi-select + SMS send
+- `SmsService` — SmsManager direct send + Intent fallback
+- `ImportScreen` — LinkedIn CSV + contacts import
+- `ContactImportService` — ContactsContract import
+- `LinkedInCSVParser` — mirrors iOS implementation
+- `SettingsScreen` + `SettingsViewModel`
+- `LaunchScreen` — Pulse identity splash
+- `OnboardingScreen`
+- Unit tests — LinkedInCSVParser, StringListConverter, TickleScheduler (all passing)
+- Build artifacts present — app has been compiled and built successfully
 
-### TickleReminder
-`id: Long`, `contactId: Long?`, `groupId: Long?`, `note`,
-`frequency: String`, `startDate: Long`, `nextDueDate: Long`,
-`lastCompletedDate: Long?`, `status: String`
+## What's Left
 
-## Key Android vs iOS Differences
+### Android — Play Store Prep
+- **App signing** — create release keystore, configure in build.gradle
+- **Play Store listing** — screenshots from emulator, description, keywords
+- **Privacy policy URL** — required by Google Play
+- **App icon** — update `ic_launcher` to use Pulse identity (currently default Android icon)
 
-| Feature | iOS | Android |
-|---|---|---|
-| Messaging | MFMessageComposeViewController (user taps Send) | SmsManager (can send silently with SEND_SMS permission) OR Intent fallback |
-| Contacts import | CNContactStore | ContactsContract |
-| Local notifications | UNUserNotificationCenter | WorkManager + NotificationManager |
-| Persistence | SwiftData | Room |
-| DI | None (structs) | Hilt |
+### Android — Nice to Have
+- **SmsManager direct send UX** — surface the "send directly vs open Messages" preference in Settings
+- **Search on ComposeScreen** — parity with iOS (filter contacts while selecting recipients)
 
-## Android SMS Advantage
-Unlike iOS, Android can send SMS silently via `SmsManager` if SEND_SMS permission granted.
-Implement a user preference: "Send directly" vs "Open Messages app".
-This is a meaningful UX win over iOS.
+## Key Notes
+
+- `SITApp.PREFS_NAME` + `SITApp.KEY_ONBOARDING_COMPLETE` — SharedPreferences keys for onboarding state
+- Room DB is version 2 — any schema changes need a migration
+- `ContactGroupCrossRef` handles the many-to-many Contact ↔ Group relationship
+- `StringListConverter` serializes `List<String>` for phone numbers, emails, tags
+- Android can send SMS silently via `SmsManager` with SEND_SMS permission — iOS cannot
+- WorkManager handles tickle notifications — persists across reboots
+- `AddContactScreen` doubles as edit screen via optional `contactId` parameter
 
 ## Pulse Brand in Compose
 
 ```kotlin
-val Navy = Color(0xFF0A1628)
-val Cobalt = Color(0xFF2563EB)
-val Amber = Color(0xFFF5C842)
+val Navy   = Color(0xFF0A1628)   // backgrounds
+val Cobalt = Color(0xFF2563EB)   // primary actions
+val Amber  = Color(0xFFF5C842)   // accent, tickle due state
 ```
 
-## Permissions Required (AndroidManifest)
+## Permissions (AndroidManifest)
 - `READ_CONTACTS` — contacts import
-- `SEND_SMS` — direct SMS (request at runtime, graceful fallback to Intent)
-- `RECEIVE_SMS` — optional, for read receipts
+- `SEND_SMS` — direct SMS (runtime request, graceful fallback to Intent)
 - `POST_NOTIFICATIONS` — tickle reminders (Android 13+)
 
-## What Claude Code Should Build
-
-1. Room database setup (SITDatabase.kt, DAOs)
-2. Compose theme (Color.kt, Theme.kt, Type.kt) using Pulse identity
-3. Main scaffold (NavHost with bottom nav: Network, Tickle, Compose, Settings)
-4. NetworkListScreen + ContactDetailScreen
-5. TickleListScreen + TickleEditScreen
-6. ComposeScreen (SmsService integration)
-7. ContactImportService (ContactsContract)
-8. LinkedInCSVParser (identical logic to iOS version)
-9. TickleScheduler (WorkManager)
-10. OnboardingScreen
-
 ## Build & Run
-Open `android/` folder in Android Studio (Hedgehog or newer).
-Run on physical device or API 26+ emulator.
+Open `android/` in Android Studio (Hedgehog or newer).
+Run on API 26+ emulator or physical Android device.
+SMS direct-send requires physical device with active SIM.
+
+## Sensitive Files — Never Commit
+`keystore.jks`, `*.keystore`, `release.properties`, `google-services.json`,
+any file containing signing passwords or API keys.

@@ -29,19 +29,22 @@ sit/
 | Wordmark | Syne 800 | "SIT" logotype |
 | Tagline font | Syne 400 | "STAY IN TOUCH" |
 
-## Feature Parity Target
+## Feature Parity Status
 
-Both platforms should implement:
-1. Contact import (phone contacts + LinkedIn CSV)
-2. Groups / circles
-3. Tickle calendar (recurring reminders)
-4. Compose SMS/MMS with templates
-5. Settings
+| Feature | iOS | Android |
+|---|---|---|
+| Contact import (phone + LinkedIn CSV) | ✅ | ✅ |
+| Groups / circles | ✅ | ✅ |
+| Tickle calendar (recurring reminders) | ✅ | ✅ |
+| Compose SMS/MMS with templates | ✅ | ✅ |
+| Settings | ✅ | ✅ |
+| Unit tests | — | ✅ (3 suites) |
+| App icon (Pulse identity) | ✅ | ⚠️ Default icon |
+| Store-ready | ⚠️ TestFlight pending | ⚠️ Signing pending |
 
 ## Platform-Specific Notes
 
-**iOS** — `MFMessageComposeViewController` for messaging (requires user tap to send)
-**Android** — `Intent.ACTION_SENDTO` for SMS, or `SmsManager` for direct send (requires SEND_SMS permission)
+**iOS** — `MFMessageComposeViewController` always requires user tap to send. No silent send possible.
+**Android** — `SmsManager` can send silently with SEND_SMS permission. Intent fallback also available.
 
-> Android CAN send SMS silently with `SmsManager` if the user grants SEND_SMS permission.
-> This is a meaningful UX advantage over iOS worth surfacing in the Android experience.
+> Android's silent SMS send is a meaningful UX advantage. Surface as a user preference in Settings.
