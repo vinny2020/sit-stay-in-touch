@@ -39,7 +39,7 @@ sit/
 | Compose SMS/MMS with templates | ✅ | ✅ |
 | Settings | ✅ | ✅ |
 | Unit tests | — | ✅ (3 suites) |
-| App icon (Pulse identity) | ✅ | ⚠️ Default icon |
+| App icon (Pulse identity) | ✅ | ✅ Adaptive icon |
 | Store-ready | ⚠️ TestFlight pending | ⚠️ Signing pending |
 
 ## Platform-Specific Notes

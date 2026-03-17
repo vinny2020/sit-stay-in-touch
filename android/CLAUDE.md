@@ -120,7 +120,7 @@ app/src/main/java/com/xaymaca/sit/
 - **App signing** — create release keystore, configure in build.gradle
 - **Play Store listing** — screenshots from emulator, description, keywords
 - **Privacy policy URL** — required by Google Play
-- **App icon** — update `ic_launcher` to use Pulse identity (currently default Android icon)
+- **App icon** — ✅ Already done — adaptive icon with Pulse identity (navy bg, cobalt bubble, amber EKG wave)
 
 ### Android — Nice to Have
 - **SmsManager direct send UX** — surface the "send directly vs open Messages" preference in Settings
