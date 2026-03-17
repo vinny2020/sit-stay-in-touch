@@ -127,6 +127,14 @@ struct TickleScheduler {
 - `.quarterly` → +3 months
 - `.custom` → user-defined interval in days (add `customIntervalDays: Int?` field)
 
+### LinkedIn Import UX Notes
+- LinkedIn data export takes 10–30 minutes after requesting — surface this clearly in the UI
+- The entire flow works on iPhone in Safari — no desktop required
+- iOS Files app handles zip extraction natively — user taps the zip, CSV appears
+- LinkedIn only includes email if the connection has made it visible — some contacts will import name/company only
+- LinkedIn never includes phone numbers — user must add manually after import
+- `ImportView` has a step-by-step guide built in as `LinkedInStep` rows
+
 ### Local notifications
 - Use `UNUserNotificationCenter`
 - Request `.alert + .sound` permission on first tickle creation

@@ -36,7 +36,20 @@ struct ImportView: View {
                     }
                     .disabled(isImporting)
                 } footer: {
-                    Text("LinkedIn: go to linkedin.com → Settings → Data Privacy → Get a copy of your data → Connections.csv")
+                    Text("LinkedIn usually emails your download link within 10–30 minutes. Come back here once you have the CSV.")
+                }
+
+                Section("How to get your LinkedIn CSV") {
+                    VStack(alignment: .leading, spacing: 10) {
+                        LinkedInStep(number: "1", text: "Open linkedin.com in Safari (works on iPhone)")
+                        LinkedInStep(number: "2", text: "Tap your photo → Settings & Privacy")
+                        LinkedInStep(number: "3", text: "Data Privacy → Get a copy of your data")
+                        LinkedInStep(number: "4", text: "Select Connections only → Request archive")
+                        LinkedInStep(number: "5", text: "Wait for LinkedIn's email (10–30 min)")
+                        LinkedInStep(number: "6", text: "Download the zip → open in Files app → tap to unzip")
+                        LinkedInStep(number: "7", text: "Come back here and tap Import from LinkedIn CSV")
+                    }
+                    .padding(.vertical, 4)
                 }
             }
             .navigationTitle("Import Contacts")
@@ -83,6 +96,7 @@ struct ImportView: View {
     }
 
     private func importFromLinkedIn(url: URL) {
+
         let accessed = url.startAccessingSecurityScopedResource()
         defer { if accessed { url.stopAccessingSecurityScopedResource() } }
         do {
@@ -92,6 +106,27 @@ struct ImportView: View {
         } catch {
             importError = error.localizedDescription
             showingError = true
+        }
+    }
+}
+
+private struct LinkedInStep: View {
+    let number: String
+    let text: String
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 10) {
+            Text(number)
+                .font(.caption)
+                .fontWeight(.semibold)
+                .foregroundStyle(.white)
+                .frame(width: 20, height: 20)
+                .background(Color.indigo)
+                .clipShape(Circle())
+            Text(text)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
         }
     }
 }
