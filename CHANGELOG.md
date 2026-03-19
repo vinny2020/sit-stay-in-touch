@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to SIT: Stay in Touch are documented here.
+All notable changes to Ticklr: Your People Matter are documented here.
 
 ## [Unreleased] — 2026-03-17
 

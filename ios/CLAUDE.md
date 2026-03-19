@@ -1,8 +1,8 @@
-# CLAUDE.md — SIT: Stay in Touch (iOS)
+# CLAUDE.md — Ticklr (iOS)
 
 ## What This App Is
 
-SIT (Stay in Touch) is a privacy-first iOS native app. Users build a curated personal contact network, organize contacts into groups, set recurring tickle reminders to stay in touch, and send SMS/MMS via the native Messages app. All data is stored locally using SwiftData. No cloud, no analytics, no account required.
+Ticklr is a privacy-first iOS native app. Users build a curated personal contact network, organize contacts into groups, set recurring tickle reminders to stay in touch, and send SMS/MMS via the native Messages app. All data is stored locally using SwiftData. No cloud, no analytics, no account required.
 
 ## Architecture
 
@@ -115,7 +115,7 @@ Suggested first session prompt:
 - **Primary / bubble**: Cobalt `#2563EB`
 - **Accent / tickle due**: Amber `#F5C842` — `Color(red: 0.96, green: 0.78, blue: 0.25)`
 - **Tab tint**: `.indigo`
-- **Wordmark**: Syne 800 — "SIT" / "STAY IN TOUCH"
+- **Wordmark**: Syne 800 — "Ticklr" / "YOUR PEOPLE MATTER"
 
 ## LinkedIn Import Notes
 

@@ -13,7 +13,7 @@ struct LaunchScreenView: View {
                     .frame(width: 100, height: 100)
 
                 VStack(spacing: 6) {
-                    Text("SIT")
+                    Text("Ticklr")
                         .font(.system(size: 38, weight: .heavy, design: .rounded))
                         .foregroundStyle(Color(red: 0.96, green: 0.78, blue: 0.25))
                         .tracking(-1)

@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "SIT"
+rootProject.name = "Ticklr"
 include(":app")

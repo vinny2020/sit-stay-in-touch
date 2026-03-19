@@ -1,4 +1,4 @@
-# SIT — Stay in Touch
+# Ticklr — Your People Matter
 
 A privacy-first personal network manager for iOS and Android. Build your contact network, stay connected on your schedule with the tickle calendar, and send messages — all stored locally with no cloud, no account required.
 

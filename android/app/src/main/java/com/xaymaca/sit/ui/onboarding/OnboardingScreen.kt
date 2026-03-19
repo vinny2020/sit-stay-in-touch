@@ -60,11 +60,11 @@ fun OnboardingScreen(
 
             // Wordmark
             Text(
-                text = "SIT",
+                text = "Ticklr",
                 fontSize = 52.sp,
                 fontWeight = FontWeight.ExtraBold,
                 color = Color.White,
-                letterSpacing = 8.sp
+                letterSpacing = 4.sp
             )
 
             // Tagline

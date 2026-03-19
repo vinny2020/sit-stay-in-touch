@@ -1,8 +1,8 @@
-# CLAUDE.md — SIT: Stay in Touch (Monorepo)
+# CLAUDE.md — Ticklr (Monorepo)
 
 ## What This Repo Is
 
-SIT is a privacy-first personal network manager with two native platform implementations.
+Ticklr is a privacy-first personal network manager with two native platform implementations.
 All data is stored on-device. No cloud, no analytics, no account required.
 
 ## Repo Structure
@@ -26,8 +26,8 @@ sit/
 | Navy | `#0A1628` | App background, icon bg |
 | Cobalt | `#2563EB` | Speech bubble, primary action |
 | Amber | `#F5C842` | EKG wave, accent, tickle due state |
-| Wordmark | Syne 800 | "SIT" logotype |
-| Tagline font | Syne 400 | "STAY IN TOUCH" |
+| Wordmark | Syne 800 | "Ticklr" logotype |
+| Tagline font | Syne 400 | "YOUR PEOPLE MATTER" |
 
 ## Feature Parity Status
 

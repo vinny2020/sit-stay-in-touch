@@ -1,7 +1,7 @@
-# CLAUDE.md — SIT Android
+# CLAUDE.md — Ticklr Android
 
 ## What This Is
-Native Android implementation of SIT (Stay in Touch). Kotlin, Jetpack Compose, Room database.
+Native Android implementation of Ticklr. Kotlin, Jetpack Compose, Room database.
 Full feature parity with iOS. See root `CLAUDE.md` for shared brand tokens.
 
 ## Architecture — MVVM + Repository

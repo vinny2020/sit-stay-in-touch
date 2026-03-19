@@ -13,7 +13,7 @@ struct OnboardingView: View {
                     .font(.system(size: 72))
                     .foregroundStyle(.indigo)
 
-                Text("Stay in Touch")
+                Text("Ticklr")
                     .font(.largeTitle)
                     .fontWeight(.bold)
 

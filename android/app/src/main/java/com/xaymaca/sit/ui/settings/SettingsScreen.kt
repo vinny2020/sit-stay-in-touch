@@ -107,7 +107,7 @@ fun SettingsScreen(
                     .padding(horizontal = 16.dp, vertical = 12.dp)
             ) {
                 Text(
-                    "SIT — Stay in Touch",
+                    "Ticklr",
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.SemiBold
                 )

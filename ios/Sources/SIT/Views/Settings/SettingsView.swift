@@ -75,7 +75,7 @@ struct SettingsView: View {
 
                 // MARK: — About
                 Section("About") {
-                    LabeledContent("App", value: "SIT: Stay in Touch")
+                    LabeledContent("App", value: "Ticklr")
                     LabeledContent("Version", value: appVersion)
                     LabeledContent("Built by", value: "Xaymaca")
                 }
