@@ -69,7 +69,7 @@ Or open `android/` in Android Studio.
 - [x] Pulse brand identity + launch screen
 - [x] iOS tickle calendar feature
 - [x] Android scaffold + full feature parity
-- [ ] iOS contacts import (CNContactStore + LinkedIn CSV)
+- [x] iOS contacts import (CNContactStore + LinkedIn CSV)
 - [ ] iCloud backup (iOS)
 - [ ] Android backup
 - [ ] App Store submission
