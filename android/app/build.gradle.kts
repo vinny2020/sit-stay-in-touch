@@ -122,3 +122,85 @@ dependencies {
     testImplementation(libs.kotlin.test)
     testImplementation(libs.gson)
 }
+
+// ---------------------------------------------------------------------------
+// Screenshot prep task — run before taking Play Store screenshots
+// Usage: ./gradlew screenshotPrep
+//
+// What it does:
+//   1. Sets the clock to 9:41 AM (standard store screenshot time)
+//   2. Sets battery to 100%, plugged-in appearance
+//   3. Enables Do Not Disturb (no notification icons)
+//   4. Hides the navigation bar demo mode
+//   5. Prints reminder to take screenshots, then tears down demo mode
+//
+// Requires a running emulator or connected device (adb must be on PATH).
+// ---------------------------------------------------------------------------
+tasks.register("screenshotPrep") {
+    group = "screenshot"
+    description = "Prepares emulator status bar for clean Play Store screenshots"
+
+    doLast {
+        val adb = "adb"
+
+        fun adb(vararg args: String) {
+            exec {
+                commandLine(adb, *args)
+                isIgnoreExitValue = true
+            }
+        }
+
+        println("📸  Entering demo mode for screenshots...")
+
+        // Enable demo mode
+        adb("shell", "settings", "put", "global", "sysui_demo_allowed", "1")
+        adb("shell", "am", "broadcast", "-a", "com.android.systemui.demo",
+            "-e", "command", "enter")
+
+        // Set clock to 9:41
+        adb("shell", "am", "broadcast", "-a", "com.android.systemui.demo",
+            "-e", "command", "clock",
+            "-e", "hhmm", "0941")
+
+        // Set battery to 100, hide charging icon
+        adb("shell", "am", "broadcast", "-a", "com.android.systemui.demo",
+            "-e", "command", "battery",
+            "-e", "level", "100",
+            "-e", "plugged", "false")
+
+        // Hide notifications
+        adb("shell", "am", "broadcast", "-a", "com.android.systemui.demo",
+            "-e", "command", "notifications",
+            "-e", "visible", "false")
+
+        // Show full signal bars + wifi
+        adb("shell", "am", "broadcast", "-a", "com.android.systemui.demo",
+            "-e", "command", "network",
+            "-e", "mobile", "show",
+            "-e", "level", "4",
+            "-e", "wifi", "show",
+            "-e", "wifiLevel", "4",
+            "-e", "nosim", "false")
+
+        println("")
+        println("✅  Demo mode active. Status bar shows: 9:41 | full signal | 100% battery | no notifications")
+        println("📱  Take your screenshots now.")
+        println("")
+        println("▶  When done, run:  ./gradlew screenshotTeardown")
+    }
+}
+
+tasks.register("screenshotTeardown") {
+    group = "screenshot"
+    description = "Exits demo mode and restores normal status bar"
+
+    doLast {
+        exec {
+            commandLine("adb", "shell", "am", "broadcast",
+                "-a", "com.android.systemui.demo",
+                "-e", "command", "exit")
+            isIgnoreExitValue = true
+        }
+        println("✅  Demo mode exited. Status bar restored.")
+    }
+}
