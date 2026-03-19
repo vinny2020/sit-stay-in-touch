@@ -27,7 +27,14 @@ targets:
     info:
       path: Sources/SIT/Resources/Info.plist
       properties:
-        NSContactsUsageDescription: "SIT needs access to your contacts to help you build your personal network."
+        NSContactsUsageDescription: "Ticklr needs access to your contacts to help you build your personal network."
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
         UILaunchScreen:
           UIColorName: ""
           UIImageName: ""
