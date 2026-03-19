@@ -70,6 +70,7 @@ Or open `android/` in Android Studio.
 - [x] iOS tickle calendar feature
 - [x] Android scaffold + full feature parity
 - [x] iOS contacts import (CNContactStore + LinkedIn CSV)
+- [x] Android contacts import (ContactsContract + LinkedIn CSV)
 - [ ] iCloud backup (iOS)
 - [ ] Android backup
 - [ ] App Store submission
