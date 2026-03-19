@@ -18,7 +18,7 @@ struct LaunchScreenView: View {
                         .foregroundStyle(Color(red: 0.96, green: 0.78, blue: 0.25))
                         .tracking(-1)
 
-                    Text("STAY IN TOUCH")
+                    Text("YOUR PEOPLE MATTER")
                         .font(.system(size: 10, weight: .regular))
                         .foregroundStyle(Color(red: 0.96, green: 0.78, blue: 0.25).opacity(0.5))
                         .tracking(4)
