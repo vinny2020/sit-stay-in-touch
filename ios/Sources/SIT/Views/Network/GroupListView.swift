@@ -110,11 +110,13 @@ struct GroupEditSheet: View {
                                 Text(e)
                                     .font(.title2)
                                     .frame(width: 44, height: 44)
-                                    .background(emoji == e ? Color.indigo.opacity(0.15) : Color(.systemGray6))
-                                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                                    .overlay(
+                                    .background(
                                         RoundedRectangle(cornerRadius: 10)
-                                            .strokeBorder(emoji == e ? Color.indigo : Color.clear, lineWidth: 2)
+                                            .fill(emoji == e ? Color.indigo.opacity(0.15) : Color(.systemGray6))
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 10)
+                                                    .strokeBorder(emoji == e ? Color.indigo : Color.clear, lineWidth: 2)
+                                            )
                                     )
                             }
                             .buttonStyle(.plain)
