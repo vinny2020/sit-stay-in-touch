@@ -87,6 +87,16 @@ Sources/SIT/
 - `PRODUCT_NAME` set to `Ticklr` — shows correctly under icon on home screen
 - Portrait-only orientation locked via `UISupportedInterfaceOrientations` in `project.yml`
 
+## App Store Listing Copy
+
+See `docs/app-store-listing.md` for the complete App Store submission copy including:
+- App name, subtitle, promotional text
+- Full description (copy-paste ready)
+- Keywords (under 100 chars)
+- Category recommendations
+- URLs (support, marketing, privacy policy)
+- Screenshot order and tips
+
 ## What's Left
 
 ### iOS — App Store Prep
