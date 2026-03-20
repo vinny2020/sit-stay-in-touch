@@ -74,7 +74,7 @@ struct TickleListView: View {
                 if allReminders.isEmpty {
                     ContentUnavailableView(
                         "No tickles yet",
-                        systemImage: "bell.badge.clock",
+                        systemImage: "bell.badge",
                         description: Text("Add one from a contact's detail page, or tap +")
                     )
                 }

@@ -20,7 +20,10 @@ enum TickleStatus: String, Codable {
 @Model
 final class TickleReminder {
     var id: UUID
+    @Relationship(deleteRule: .nullify, inverse: \Contact.tickles)
     var contact: Contact?
+
+    @Relationship(deleteRule: .nullify, inverse: \ContactGroup.tickles)
     var group: ContactGroup?
     var note: String
     var frequency: TickleFrequency

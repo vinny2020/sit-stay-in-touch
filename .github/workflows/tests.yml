@@ -1,0 +1,44 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Unit Tests
+    runs-on: macos-15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode 16
+        run: sudo xcode-select -switch /Applications/Xcode_16.app
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        working-directory: ios
+        run: xcodegen generate
+
+      - name: Run tests
+        working-directory: ios
+        run: |
+          xcodebuild test \
+            -project SIT.xcodeproj \
+            -scheme SIT \
+            -destination 'platform=iOS Simulator,OS=18.0,name=iPhone 16' \
+            -resultBundlePath TestResults \
+            CODE_SIGNING_ALLOWED=NO \
+            | xcpretty --report junit --output test-results.xml
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: ios/test-results.xml

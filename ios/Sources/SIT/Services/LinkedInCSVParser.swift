@@ -24,6 +24,7 @@ struct LinkedInCSVParser {
         let emailIdx     = headers.firstIndex(of: "Email Address")
         let companyIdx   = headers.firstIndex(of: "Company")
         let positionIdx  = headers.firstIndex(of: "Position")
+        let phoneIdx     = headers.firstIndex(of: "Phone Number")
 
         var imported = 0
         for line in lines[(headerIndex + 1)...] {
@@ -31,11 +32,12 @@ struct LinkedInCSVParser {
             guard fields.count > max(firstNameIdx, lastNameIdx) else { continue }
 
             let contact = Contact(
-                firstName: fields[safe: firstNameIdx] ?? "",
-                lastName:  fields[safe: lastNameIdx] ?? "",
-                emails:    [fields[safe: emailIdx] ?? ""].filter { !$0.isEmpty },
-                company:   fields[safe: companyIdx] ?? "",
-                jobTitle:  fields[safe: positionIdx] ?? "",
+                firstName:    fields[safe: firstNameIdx] ?? "",
+                lastName:     fields[safe: lastNameIdx] ?? "",
+                phoneNumbers: [fields[safe: phoneIdx] ?? ""].filter { !$0.isEmpty },
+                emails:       [fields[safe: emailIdx] ?? ""].filter { !$0.isEmpty },
+                company:      fields[safe: companyIdx] ?? "",
+                jobTitle:     fields[safe: positionIdx] ?? "",
                 importSource: .linkedin
             )
             context.insert(contact)

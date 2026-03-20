@@ -8,6 +8,7 @@ final class ContactGroup {
     var emoji: String
     var createdAt: Date
     var contacts: [Contact]
+    var tickles: [TickleReminder] = []
 
     init(name: String, emoji: String = "👥") {
         self.id = UUID()

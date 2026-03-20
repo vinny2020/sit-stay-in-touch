@@ -106,7 +106,7 @@ struct SettingsView: View {
                     }
                     .foregroundColor(.yellow)
 
-                    Button("Clear All Contacts", role: .destructive) {
+                    Button("Clear All Data", role: .destructive) {
                         showClearConfirm = true
                     }
 
@@ -121,23 +121,26 @@ struct SettingsView: View {
                     Text("Debug only — not visible in release builds.")
                 }
                 .confirmationDialog(
-                    "Clear all contacts?",
+                    "Clear all data?",
                     isPresented: $showClearConfirm,
                     titleVisibility: .visible
                 ) {
-                    Button("Delete All Contacts", role: .destructive) {
+                    Button("Delete All Data", role: .destructive) {
                         Task { @MainActor in
-                            let all = (try? modelContext.fetch(FetchDescriptor<Contact>())) ?? []
-                            for contact in all {
-                                modelContext.delete(contact)
-                            }
+                            let contacts = (try? modelContext.fetch(FetchDescriptor<Contact>())) ?? []
+                            for contact in contacts { modelContext.delete(contact) }
+                            let groups = (try? modelContext.fetch(FetchDescriptor<ContactGroup>())) ?? []
+                            for group in groups { modelContext.delete(group) }
+                            let tickles = (try? modelContext.fetch(FetchDescriptor<TickleReminder>())) ?? []
+                            for tickle in tickles { modelContext.delete(tickle) }
+                            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
                             try? modelContext.save()
-                            seedMessage = "All contacts cleared ✓"
+                            seedMessage = "All data cleared ✓"
                         }
                     }
                     Button("Cancel", role: .cancel) {}
                 } message: {
-                    Text("This will permanently delete all contacts from the app. This cannot be undone.")
+                    Text("This will permanently delete all contacts, groups, and tickles. This cannot be undone.")
                 }
                 #endif
             }

@@ -25,6 +25,8 @@ final class Contact {
     @Relationship(deleteRule: .nullify, inverse: \ContactGroup.contacts)
     var groups: [ContactGroup]
 
+    var tickles: [TickleReminder] = []
+
     init(
         firstName: String,
         lastName: String,

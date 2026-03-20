@@ -40,4 +40,17 @@ targets:
           UIImageName: ""
     dependencies: []
     scheme:
-      testTargets: []
+      testTargets:
+        - SITTests
+
+  SITTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: Tests/SITTests
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.xaymaca.sit.tests
+        SWIFT_VERSION: "6.0"
+    dependencies:
+      - target: SIT
