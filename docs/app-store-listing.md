@@ -1,0 +1,63 @@
+# Ticklr — App Store Listing Copy
+
+## App Name
+Ticklr
+
+## Subtitle *(30 chars max)*
+Your personal network manager
+
+## Promotional Text *(170 chars — editable any time without re-review)*
+No account. No cloud. No algorithm deciding who matters. Just you, your people, and a gentle nudge when it's time to reach out.
+
+## Description *(4000 chars max — first ~3 lines visible before "more")*
+
+Your people matter. Stay in touch on your terms.
+
+Ticklr is a privacy-first contact network manager that helps you maintain meaningful relationships — without algorithms, social feeds, or a cloud account. Everything lives on your device.
+
+Set recurring reminders to reach out. Call your dad every Sunday. Check in with a colleague every quarter. Ticklr quietly notifies you when it's time, then schedules the next reminder automatically.
+
+FEATURES
+
+— Tickle calendar: set daily, weekly, monthly, or custom recurring reminders per contact
+— Import contacts from your iPhone or LinkedIn CSV export
+— Organize into groups: Family, Work, Board, Friends — any label you want
+— Compose SMS and MMS to multiple contacts at once using saved message templates
+— 100% on-device: no account, no cloud sync, no analytics, no tracking
+
+YOUR DATA STAYS ON YOUR PHONE
+
+Ticklr has no servers and collects no data. Your contacts, reminders, and messages are stored exclusively in your device's secure local database. We have no way to see your data — because we never receive it.
+
+## Keywords *(100 chars max, comma-separated — no spaces after commas)*
+personal CRM,contact manager,relationship tracker,stay in touch,network,reminders,follow up,tickle,privacy
+
+## Category
+- Primary: Productivity
+- Secondary: Utilities
+
+## URLs
+- Support URL: https://xaymaca.com/sit/support
+- Marketing URL: https://xaymaca.com/sit
+- Privacy Policy URL: https://xaymaca.com/sit/privacy
+
+## App Store Screenshot Notes *(iPhone 6.9" required — up to 10)*
+
+Recommended screenshot order:
+1. Splash / launch screen (Ticklr wordmark + EKG animation)
+2. Network list — contacts imported, scrolled to show variety
+3. Contact detail — name, company, tickle badge
+4. Tickle list — Due section with 2-3 due contacts visible
+5. Tickle edit — frequency picker open
+6. Groups list — several groups visible
+7. Compose — multi-select with 3+ contacts chosen
+8. Settings — clean overview
+
+Tips:
+- Use Settings > Debug > Clear All Contacts then Load Test Contacts for clean 20-contact dataset
+- Status bar should show 9:41, full signal, 100% battery — use iOS Simulator or Demo Mode
+- iPhone 17 Pro Max screenshots (6.9") are accepted for the primary size class
+
+## Version Notes (first submission)
+- Version: 1.0
+- What's New: Initial release
