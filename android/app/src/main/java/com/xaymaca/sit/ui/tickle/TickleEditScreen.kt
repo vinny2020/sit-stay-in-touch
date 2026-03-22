@@ -33,6 +33,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun TickleEditScreen(
     tickleId: Long?,
+    preselectedContactId: Long? = null,
     onSaved: () -> Unit,
     onBack: () -> Unit,
     tickleViewModel: TickleViewModel = hiltViewModel(),
@@ -54,6 +55,13 @@ fun TickleEditScreen(
     var startDate by remember { mutableLongStateOf(System.currentTimeMillis()) }
     var showFrequencyDropdown by remember { mutableStateOf(false) }
     var isLoaded by remember { mutableStateOf(tickleId == null) }
+
+    // Pre-populate contact when navigating from ContactDetail
+    LaunchedEffect(preselectedContactId) {
+        if (tickleId == null && preselectedContactId != null) {
+            selectedContact = networkViewModel.getContactById(preselectedContactId)
+        }
+    }
 
     // Load existing reminder for edit mode
     LaunchedEffect(tickleId) {

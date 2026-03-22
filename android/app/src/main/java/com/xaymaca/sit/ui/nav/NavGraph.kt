@@ -166,7 +166,7 @@ fun NavGraph() {
                 ContactDetailScreen(
                     contactId = contactId,
                     onBack = { navController.popBackStack() },
-                    onAddTickle = { navController.navigate(Screen.TickleEdit.createRoute(-1L)) },
+                    onAddTickle = { navController.navigate(Screen.TickleEdit.createRouteWithContact(contactId)) },
                     onEdit = { navController.navigate("edit_contact/$contactId") }
                 )
             }
@@ -215,11 +215,16 @@ fun NavGraph() {
 
             composable(
                 route = Screen.TickleEdit.ROUTE,
-                arguments = listOf(navArgument("tickleId") { type = NavType.LongType })
+                arguments = listOf(
+                    navArgument("tickleId") { type = NavType.LongType },
+                    navArgument("contactId") { type = NavType.LongType; defaultValue = -1L }
+                )
             ) { backStackEntry ->
                 val tickleId = backStackEntry.arguments?.getLong("tickleId") ?: -1L
+                val contactId = backStackEntry.arguments?.getLong("contactId")?.takeIf { it != -1L }
                 TickleEditScreen(
                     tickleId = if (tickleId == -1L) null else tickleId,
+                    preselectedContactId = contactId,
                     onSaved = { navController.popBackStack() },
                     onBack = { navController.popBackStack() }
                 )

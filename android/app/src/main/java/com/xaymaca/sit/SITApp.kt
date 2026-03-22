@@ -31,7 +31,7 @@ class SITApp : Application(), Configuration.Provider {
             "Tickle Reminders",
             NotificationManager.IMPORTANCE_DEFAULT
         ).apply {
-            description = "Reminders to stay in touch with your network"
+            description = "Ticklr reminders"
         }
         val notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

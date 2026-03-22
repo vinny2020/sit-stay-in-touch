@@ -17,10 +17,11 @@ sealed class Screen(val route: String) {
         }
     }
     object Tickle : Screen("tickle")
-    data class TickleEdit(val id: Long = -1L) : Screen("tickle_edit/{tickleId}") {
+    data class TickleEdit(val id: Long = -1L) : Screen("tickle_edit/{tickleId}?contactId={contactId}") {
         companion object {
-            const val ROUTE = "tickle_edit/{tickleId}"
+            const val ROUTE = "tickle_edit/{tickleId}?contactId={contactId}"
             fun createRoute(id: Long = -1L) = "tickle_edit/$id"
+            fun createRouteWithContact(contactId: Long) = "tickle_edit/-1?contactId=$contactId"
         }
     }
     object Compose : Screen("compose")

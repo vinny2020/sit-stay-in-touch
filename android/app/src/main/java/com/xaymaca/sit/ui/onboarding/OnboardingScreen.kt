@@ -69,7 +69,7 @@ fun OnboardingScreen(
 
             // Tagline
             Text(
-                text = "STAY IN TOUCH",
+                text = "YOUR PEOPLE MATTER",
                 style = MaterialTheme.typography.labelLarge,
                 color = Amber,
                 letterSpacing = 4.sp

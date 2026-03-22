@@ -49,7 +49,7 @@ class TickleWorker @AssistedInject constructor(
             } ?: "your contact"
 
             val title = "Time to reach out to $contactName"
-            val body = reminder.note.ifBlank { "Stay in touch — send a quick message today." }
+            val body = reminder.note.ifBlank { "Your people matter — send a quick message today." }
 
             val notification = NotificationCompat.Builder(context, SITApp.TICKLE_CHANNEL_ID)
                 .setSmallIcon(android.R.drawable.ic_dialog_info)

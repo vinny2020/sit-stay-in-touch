@@ -17,9 +17,10 @@
 - `service/TickleWorker.kt` — change notification body text from `"Stay in touch"` to `"Your people matter"` (or similar)
 - `SITApp.kt` — change notification channel description from `"stay in touch"` to `"Ticklr reminders"`
 
-### Bug 3 — Android app icon doesn't match iOS
-**Current state:** The adaptive icon uses the Pulse speech bubble + EKG wave SVG in `drawable/ic_launcher_foreground.xml` on Navy background. This is the correct identity but the proportions/sizing may differ from the iOS icon.
-**What to do:** Compare `ic_launcher_foreground.xml` against the iOS `icon_1024.png` in `ios/Sources/SIT/Resources/Assets.xcassets/AppIcon.appiconset/`. Adjust the SVG `pathData` coordinates so the bubble and EKG wave fill the same visual weight as the iOS version. The viewportWidth/Height is 108dp — the safe zone for adaptive icons is the inner 72dp circle.
+### Bug 3 — Android app icon EKG wave doesn't match iOS
+**Symptom:** The Android icon has correct colors (Navy bg, Cobalt bubble, Amber EKG) but the EKG wave is flatter and less pronounced than the iOS version. The iOS icon has sharper, taller peaks on the wave.
+**What was done:** Updated `ic_launcher_foreground.xml` with improved pathData that more closely matches the iOS `PulseWaveShape` proportions — wider bubble (22,22 to 86,74) and taller wave peaks (y:34 low, y:62 high). Stroke width increased from 3 to 4.
+**If still not matching after rebuild:** Fine-tune the pathData coordinates in `drawable/ic_launcher_foreground.xml`. The iOS wave goes from y=mid, dips to mid-55% height, rises to mid+55%, then mid-35%, mid+20%, back to mid. The viewport is 108×108dp with safe zone at the inner 72dp circle.
 
 
 
