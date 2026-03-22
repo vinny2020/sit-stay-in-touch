@@ -3,7 +3,8 @@
 ## ⚠️ Bugs to Fix (Next Session)
 
 ### Bug 1 — Tickle navigation from ContactDetail goes to Network list instead of TickleEdit
-**Symptom:** Tapping "Add Tickle" on a contact's detail screen navigates to the full Network list instead of opening the TickleEdit screen pre-populated with that contact.
+**Symptom:** Tapping "Add Tickle" on a contact's detail screen navigates to a "New Tickle" screen that shows the full contact search/picker list (showing all contacts alphabetically) instead of opening the TickleEdit screen with that contact already pre-selected. The user has to manually search for and re-select the contact they just came from.
+**Screenshot:** User sees "New Tickle" with Contact/Group tabs, a "Search contacts" field, and the full contact list — instead of a pre-filled form with the contact already chosen.
 **Root cause:** In `NavGraph.kt` the `onAddTickle` lambda calls `Screen.TickleEdit.createRoute(-1L)` which creates a new blank tickle with no contact pre-selected. The `TickleEdit` route needs to accept an optional `contactId` parameter so the contact is pre-filled.
 **Files to change:**
 - `ui/nav/Screen.kt` — add optional `contactId` param to `TickleEdit` route: `"tickle_edit/{tickleId}?contactId={contactId}"`
