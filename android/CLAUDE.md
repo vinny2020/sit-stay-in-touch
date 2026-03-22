@@ -1,8 +1,26 @@
 # CLAUDE.md — Ticklr Android
 
-## What This Is
-Native Android implementation of Ticklr. Kotlin, Jetpack Compose, Room database.
-Full feature parity with iOS. See root `CLAUDE.md` for shared brand tokens.
+## ⚠️ Bugs to Fix (Next Session)
+
+### Bug 1 — Tickle navigation from ContactDetail goes to Network list instead of TickleEdit
+**Symptom:** Tapping "Add Tickle" on a contact's detail screen navigates to the full Network list instead of opening the TickleEdit screen pre-populated with that contact.
+**Root cause:** In `NavGraph.kt` the `onAddTickle` lambda calls `Screen.TickleEdit.createRoute(-1L)` which creates a new blank tickle with no contact pre-selected. The `TickleEdit` route needs to accept an optional `contactId` parameter so the contact is pre-filled.
+**Files to change:**
+- `ui/nav/Screen.kt` — add optional `contactId` param to `TickleEdit` route: `"tickle_edit/{tickleId}?contactId={contactId}"`
+- `ui/nav/NavGraph.kt` — update `onAddTickle` in `ContactDetailScreen` to pass the contactId: `navController.navigate(Screen.TickleEdit.createRouteWithContact(contactId))`
+- `ui/tickle/TickleEditScreen.kt` — read the optional `contactId` from nav args and pre-populate the contact picker
+
+### Bug 2 — "STAY IN TOUCH" still showing in OnboardingScreen and notification body
+**Files to change:**
+- `ui/onboarding/OnboardingScreen.kt` — change tagline text from `"STAY IN TOUCH"` to `"YOUR PEOPLE MATTER"`
+- `service/TickleWorker.kt` — change notification body text from `"Stay in touch"` to `"Your people matter"` (or similar)
+- `SITApp.kt` — change notification channel description from `"stay in touch"` to `"Ticklr reminders"`
+
+### Bug 3 — Android app icon doesn't match iOS
+**Current state:** The adaptive icon uses the Pulse speech bubble + EKG wave SVG in `drawable/ic_launcher_foreground.xml` on Navy background. This is the correct identity but the proportions/sizing may differ from the iOS icon.
+**What to do:** Compare `ic_launcher_foreground.xml` against the iOS `icon_1024.png` in `ios/Sources/SIT/Resources/Assets.xcassets/AppIcon.appiconset/`. Adjust the SVG `pathData` coordinates so the bubble and EKG wave fill the same visual weight as the iOS version. The viewportWidth/Height is 108dp — the safe zone for adaptive icons is the inner 72dp circle.
+
+
 
 ## Architecture — MVVM + Repository
 - **UI**: Jetpack Compose (no XML layouts)
