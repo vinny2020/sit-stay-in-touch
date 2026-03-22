@@ -2,25 +2,7 @@
 
 ## ⚠️ Bugs to Fix (Next Session)
 
-### Bug 1 — Tickle navigation from ContactDetail goes to Network list instead of TickleEdit
-**Symptom:** Tapping "Add Tickle" on a contact's detail screen navigates to a "New Tickle" screen that shows the full contact search/picker list (showing all contacts alphabetically) instead of opening the TickleEdit screen with that contact already pre-selected. The user has to manually search for and re-select the contact they just came from.
-**Screenshot:** User sees "New Tickle" with Contact/Group tabs, a "Search contacts" field, and the full contact list — instead of a pre-filled form with the contact already chosen.
-**Root cause:** In `NavGraph.kt` the `onAddTickle` lambda calls `Screen.TickleEdit.createRoute(-1L)` which creates a new blank tickle with no contact pre-selected. The `TickleEdit` route needs to accept an optional `contactId` parameter so the contact is pre-filled.
-**Files to change:**
-- `ui/nav/Screen.kt` — add optional `contactId` param to `TickleEdit` route: `"tickle_edit/{tickleId}?contactId={contactId}"`
-- `ui/nav/NavGraph.kt` — update `onAddTickle` in `ContactDetailScreen` to pass the contactId: `navController.navigate(Screen.TickleEdit.createRouteWithContact(contactId))`
-- `ui/tickle/TickleEditScreen.kt` — read the optional `contactId` from nav args and pre-populate the contact picker
-
-### Bug 2 — "STAY IN TOUCH" still showing in OnboardingScreen and notification body
-**Files to change:**
-- `ui/onboarding/OnboardingScreen.kt` — change tagline text from `"STAY IN TOUCH"` to `"YOUR PEOPLE MATTER"`
-- `service/TickleWorker.kt` — change notification body text from `"Stay in touch"` to `"Your people matter"` (or similar)
-- `SITApp.kt` — change notification channel description from `"stay in touch"` to `"Ticklr reminders"`
-
-### Bug 3 — Android app icon EKG wave doesn't match iOS
-**Symptom:** The Android icon has correct colors (Navy bg, Cobalt bubble, Amber EKG) but the EKG wave is flatter and less pronounced than the iOS version. The iOS icon has sharper, taller peaks on the wave.
-**What was done:** Updated `ic_launcher_foreground.xml` with improved pathData that more closely matches the iOS `PulseWaveShape` proportions — wider bubble (22,22 to 86,74) and taller wave peaks (y:34 low, y:62 high). Stroke width increased from 3 to 4.
-**If still not matching after rebuild:** Fine-tune the pathData coordinates in `drawable/ic_launcher_foreground.xml`. The iOS wave goes from y=mid, dips to mid-55% height, rises to mid+55%, then mid-35%, mid+20%, back to mid. The viewport is 108×108dp with safe zone at the inner 72dp circle.
+_None — all known bugs resolved._
 
 
 
@@ -132,7 +114,7 @@ app/src/main/java/com/xaymaca/sit/
 - `SeedDataService` — DEBUG only, loads `test_contacts.csv` from assets
 - `LaunchScreen` — Pulse identity splash
 - `OnboardingScreen`
-- Unit tests — LinkedInCSVParser, StringListConverter, TickleScheduler (all passing)
+- Unit tests — LinkedInCSVParser, StringListConverter, TickleScheduler, ScreenRoute, ContactRepository (all passing)
 - Build artifacts present — app has been compiled and built successfully
 - Screenshot prep — `./gradlew screenshotPrep` sets 9:41, full signal, 100% battery, no notifications
 - Screenshot teardown — `./gradlew screenshotTeardown` restores normal status bar
@@ -165,7 +147,6 @@ The keystore at `~/Documents/ticklr-release.keystore` is critical — back it up
 - **App icon** — ✅ Already done — adaptive icon with Pulse identity
 
 ### Android — Nice to Have
-- **Clear All Contacts debug button** — iOS has it, Android only has Load (parity gap)
 - **SmsManager direct send UX** — surface the "send directly vs open Messages" preference in Settings
 - **Search on ComposeScreen** — parity with iOS (filter contacts while selecting recipients)
 
