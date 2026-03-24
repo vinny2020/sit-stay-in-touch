@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1600"
-   version = "1.3">
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
-      buildImplicitDependencies = "YES">
+      buildImplicitDependencies = "YES"
+      runPostActionsOnFailure = "NO">
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
@@ -15,7 +16,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B2C0561D284F2617E641F70B"
-               BuildableName = "Ticklr.app"
+               BuildableName = "SIT.app"
                BlueprintName = "SIT"
                ReferencedContainer = "container:SIT.xcodeproj">
             </BuildableReference>
@@ -26,12 +27,13 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "NO">
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B2C0561D284F2617E641F70B"
-            BuildableName = "Ticklr.app"
+            BuildableName = "SIT.app"
             BlueprintName = "SIT"
             ReferencedContainer = "container:SIT.xcodeproj">
          </BuildableReference>
@@ -43,12 +45,14 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2E897AE05B52A8BAD8F94342"
-               BuildableName = "Ticklr.xctest"
+               BuildableName = "SITTests.xctest"
                BlueprintName = "SITTests"
                ReferencedContainer = "container:SIT.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
+      <CommandLineArguments>
+      </CommandLineArguments>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -65,11 +69,13 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B2C0561D284F2617E641F70B"
-            BuildableName = "Ticklr.app"
+            BuildableName = "SIT.app"
             BlueprintName = "SIT"
             ReferencedContainer = "container:SIT.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+      </CommandLineArguments>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -82,11 +88,13 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B2C0561D284F2617E641F70B"
-            BuildableName = "Ticklr.app"
+            BuildableName = "SIT.app"
             BlueprintName = "SIT"
             ReferencedContainer = "container:SIT.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+      </CommandLineArguments>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

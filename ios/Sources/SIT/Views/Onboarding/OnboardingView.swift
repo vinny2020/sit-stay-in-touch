@@ -30,7 +30,7 @@ struct OnboardingView: View {
                 Button {
                     showingImport = true
                 } label: {
-                    Label("Import Contacts", systemImage: "person.badge.plus")
+                    Label("Get Started", systemImage: "arrow.right.circle.fill")
                         .frame(maxWidth: .infinity)
                         .padding()
                         .background(Color.indigo)
