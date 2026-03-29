@@ -50,7 +50,7 @@ struct NetworkListView: View {
                     ContentUnavailableView(
                         "No contacts yet",
                         systemImage: "person.2.slash",
-                        description: Text("Tap + to import from your iPhone or LinkedIn")
+                        description: Text("Tap + to add from your iPhone or LinkedIn")
                     )
                 } else if !searchText.isEmpty && filtered.isEmpty {
                     ContentUnavailableView.search
