@@ -17,7 +17,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -134,7 +134,7 @@ fun NotificationsAccessBanner(modifier: Modifier = Modifier) {
             style = TextStyle(fontSize = 12.sp, fontWeight = FontWeight.Medium, color = palette.accent),
         )
         Icon(
-            imageVector = Icons.Filled.ChevronRight,
+            imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
             contentDescription = null,
             tint = palette.accent,
         )
