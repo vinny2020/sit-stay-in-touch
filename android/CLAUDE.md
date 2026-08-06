@@ -81,18 +81,19 @@ future consideration. State as of now:
   AddContact, ContactDetail, GroupDetail, Compose, Import). `SettingsRow` uses
   `Icons.AutoMirrored.Filled.KeyboardArrowRight`.
 
-**Known loose ends** (both cosmetic — worth fixing during an RTL visual-QA pass):
+Leftovers found and fixed in the 2026-08 API 36 QA pass (PR #109): four non-mirroring
+`Icons.Filled.ChevronRight` call sites (NetworkListScreen, GroupListScreen, both warm access
+banners) and a hardcoded `"→"` appended to WarmCard's CTA prompt (now picked from
+`LocalLayoutDirection`).
 
-- Four chevrons still use the non-mirroring `Icons.Filled.ChevronRight` and will point the wrong
-  way under RTL: `ui/network/NetworkListScreen.kt:397`, `ui/groups/GroupListScreen.kt:268`,
-  `ui/warm/ContactsAccessBanner.kt:141`, `ui/warm/NotificationsAccessBanner.kt:137`. Convert to
-  `Icons.AutoMirrored.Filled.KeyboardArrowRight` to match `SettingsRow`.
-- `ui/warm/MonogramAvatar.kt:100` uses `.offset(x = …)` for a hardcoded shadow/highlight offset —
-  `x` offsets don't auto-flip under RTL.
+**Not a bug, don't "fix" it:** `MonogramAvatar.kt`'s `.offset(x = …)` badge nudge is RTL-safe —
+the `Dp` overload of `Modifier.offset` auto-mirrors. Only `absoluteOffset` and the lambda
+(`IntOffset`) overload don't.
 
 **If adding more RTL languages (Farsi, etc.):** add `values-<locale>/strings.xml`, add the code
-to `resourceConfigurations`, then visual-QA on an emulator with the locale forced. The manifest
-and localization framework are already in place; only the icon/offset leftovers above need work.
+to `resourceConfigurations`, then visual-QA on an emulator with the locale forced
+(`adb shell cmd locale set-app-locales <pkg> --locales fa` sets it per-app without touching the
+device). The manifest, icons, and localization framework are all in place.
 
 ---
 
