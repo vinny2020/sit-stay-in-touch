@@ -23,10 +23,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.xaymaca.sit.R
@@ -200,8 +202,10 @@ private fun RowCard(
             if (contactsCount != null) CountLine(contactsCount, palette.ink2)
             if (showPrompt) {
                 Spacer(modifier = Modifier.height(4.dp))
+                // Arrow must follow the reading direction — "→" would point backwards in RTL.
+                val promptArrow = if (LocalLayoutDirection.current == LayoutDirection.Rtl) "←" else "→"
                 Text(
-                    text = stringResource(category.promptShortRes) + "  →",
+                    text = stringResource(category.promptShortRes) + "  " + promptArrow,
                     style = TextStyle(
                         fontSize = 12.sp,
                         fontWeight = FontWeight.SemiBold,
