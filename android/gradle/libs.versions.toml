@@ -13,7 +13,7 @@ coroutines = "1.8.1"
 work = "2.9.0"
 gson = "2.10.1"
 play-publisher = "3.12.2"
-robolectric = "4.14.1"
+robolectric = "4.16.1"
 mockk = "1.13.13"
 
 [libraries]

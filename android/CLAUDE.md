@@ -95,7 +95,7 @@ This is the most labor-intensive phase if undertaken. Treat as a project unto it
 - **Navigation**: Navigation Compose (`NavGraph.kt`)
 - **Background work**: WorkManager (`TickleWorker`) + `AlarmManager` via `TickleAlarmReceiver`
 - **Localization**: `res/values/strings.xml` + 20 translated locales (ar, cs, de, el, es, fr, he, hi, hu, it, ja, ko, nl, pl, pt, ro, ru, sv, ur, zh); `resourceConfigurations` restricts bundled to these 21.
-- **Min SDK**: 26 (Android 8.0) · **Target SDK**: 35
+- **Min SDK**: 26 (Android 8.0) · **Target SDK**: 36 (Android 16)
 - **SMS**: intent-only handoff via `Intent.ACTION_SENDTO` (`smsto:` URI). No `SEND_SMS` permission. (Removed in v1.5.5-production for Google Play SMS/Call Log policy compliance — see archive.)
 
 ## Project Structure
