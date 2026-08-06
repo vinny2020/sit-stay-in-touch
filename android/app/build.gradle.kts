@@ -18,12 +18,12 @@ plugins {
 
 android {
     namespace = "com.xaymaca.sit"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.xaymaca.sit"
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 36
         // Allow GitHub Actions to override version code and name from the tag/run number
         versionCode = project.findProperty("versionCode")?.toString()?.toInt() ?: 27
         versionName = project.findProperty("versionName")?.toString() ?: "1.12.1"
