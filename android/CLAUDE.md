@@ -68,21 +68,32 @@ The Compose launch screen view is no longer referenced anywhere — replaced by 
 
 > Not on the runway. Reference notes for if these ever come up.
 
-### RTL (right-to-left) language support
+### RTL (right-to-left) language support — ✅ shipped
 
-Only needed if Arabic, Hebrew, Urdu, Farsi, or other RTL languages are added to `strings.xml`.
-Currently `android:supportsRtl="false"` in `AndroidManifest.xml` since no RTL translations
-ship — and forced-RTL on devices was mirroring our LTR layouts. To enable:
+RTL support shipped in `1bd4ac6` (2026-05-12, *"feat: add Hebrew and Urdu RTL localizations"*)
+alongside the Arabic, Hebrew, and Urdu translations. This is **done** — it is no longer a
+future consideration. State as of now:
 
-- Flip `android:supportsRtl="true"` in `AndroidManifest.xml`
-- Audit Compose icons — switch directional ones (chevrons, send) to `Icons.AutoMirrored.*` variants. `SettingsScreen.kt` uses `Icons.Default.ChevronRight` in `SettingsRow` — that needs to become `Icons.AutoMirrored.Filled.ChevronRight`.
-- Search the codebase for RTL-breaking patterns: `padding(left =`, `padding(right =`, `offset(x =`, `absoluteOffset(`. Replace with `padding(start = / end =)` where appropriate; hardcoded `x` offsets don't auto-flip.
-- Verify `TicklrToast` centers correctly in RTL.
-- Add `values-ar/strings.xml` (Arabic has 6 plural categories: zero/one/two/few/many/other — Android supports all).
-- Add `"ar"` to `resourceConfigurations` in `build.gradle.kts`.
-- Test on emulator with Arabic locale forced; budget time for visual QA on every screen.
+- `android:supportsRtl="true"` in `AndroidManifest.xml`.
+- RTL locales ship: `values-ar/`, `values-he/` + `values-iw/` (legacy Hebrew code), `values-ur/`.
+  All present in `resourceConfigurations` in `build.gradle.kts`.
+- Directional icons use `Icons.AutoMirrored.*` across ~10 screens (Settings, Templates, Tickle,
+  AddContact, ContactDetail, GroupDetail, Compose, Import). `SettingsRow` uses
+  `Icons.AutoMirrored.Filled.KeyboardArrowRight`.
 
-This is the most labor-intensive phase if undertaken. Treat as a project unto itself.
+Leftovers found and fixed in the 2026-08 API 36 QA pass (PR #109): four non-mirroring
+`Icons.Filled.ChevronRight` call sites (NetworkListScreen, GroupListScreen, both warm access
+banners) and a hardcoded `"→"` appended to WarmCard's CTA prompt (now picked from
+`LocalLayoutDirection`).
+
+**Not a bug, don't "fix" it:** `MonogramAvatar.kt`'s `.offset(x = …)` badge nudge is RTL-safe —
+the `Dp` overload of `Modifier.offset` auto-mirrors. Only `absoluteOffset` and the lambda
+(`IntOffset`) overload don't.
+
+**If adding more RTL languages (Farsi, etc.):** add `values-<locale>/strings.xml`, add the code
+to `resourceConfigurations`, then visual-QA on an emulator with the locale forced
+(`adb shell cmd locale set-app-locales <pkg> --locales fa` sets it per-app without touching the
+device). The manifest, icons, and localization framework are all in place.
 
 ---
 
