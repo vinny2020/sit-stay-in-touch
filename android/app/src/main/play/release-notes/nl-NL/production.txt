@@ -1,6 +1,3 @@
-Je herinneringen werken eindelijk zoals het altijd had gemoeten.
-• Stuur iemand een bericht en Ticklr biedt aan de tickle af te vinken
-• Herinneringen zijn weer betrouwbaar — Klaar of Uitstellen vanuit de melding
-• Opstellen stelt voor wie vandaag aan de beurt is
-• Maak bijna alles ongedaan; stel 1 dag, 3 of een week uit
-• Groepen filteren je netwerk en hebben eigen tickles
+Ticklr is klaar voor Android 16.
+• Bijgewerkt voor Android 16 – volledige compatibiliteit met de nieuwste toestellen
+• Verbeteringen voor rechts-naar-linkstalen: pijlen en pictogrammen wijzen nu de juiste kant op in het Arabisch, Hebreeuws en Urdu

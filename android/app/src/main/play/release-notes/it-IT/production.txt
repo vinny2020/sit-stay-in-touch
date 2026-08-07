@@ -1,6 +1,3 @@
-I tuoi promemoria funzionano finalmente come avrebbero sempre dovuto.
-• Scrivi a qualcuno e Ticklr ti propone di segnare il tickle come fatto
-• I promemoria sono di nuovo affidabili — Fatto o Posticipa dalla notifica
-• Componi ti suggerisce chi sentire oggi
-• Annulla quasi tutto; posticipa di 1 giorno, 3 o una settimana
-• I gruppi filtrano la tua rete e hanno i propri tickles
+Ticklr è pronto per Android 16.
+• Aggiornato per Android 16: piena compatibilità con i dispositivi più recenti
+• Rifiniture per le lingue da destra a sinistra: frecce e icone ora puntano nella direzione giusta in arabo, ebraico e urdu

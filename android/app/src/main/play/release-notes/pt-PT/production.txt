@@ -1,6 +1,3 @@
-Os teus lembretes funcionam finalmente como sempre deviam.
-• Escreve a alguém e o Ticklr propõe marcar o tickle como feito
-• Os lembretes voltam a ser fiáveis — Feito ou Adiar diretamente da notificação
-• O compor sugere com quem falar hoje
-• Anula quase tudo; adia 1 dia, 3 ou uma semana
-• Os grupos filtram a tua rede e têm os seus próprios tickles
+O Ticklr está pronto para o Android 16.
+• Atualizado para o Android 16 — compatibilidade total com os dispositivos mais recentes
+• Melhorias para idiomas da direita para a esquerda: as setas e os ícones apontam agora na direção certa em árabe, hebraico e urdu
