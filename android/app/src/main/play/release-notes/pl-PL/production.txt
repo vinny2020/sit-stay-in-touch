@@ -1,6 +1,3 @@
-Twoje przypomnienia w końcu działają tak, jak zawsze powinny.
-• Napisz do kogoś, a Ticklr zaproponuje oznaczenie tickle jako zrobione
-• Przypomnienia znów są niezawodne — Zrobione lub Drzemka prosto z powiadomienia
-• Tworzenie podpowiada, z kim się dziś odezwać
-• Cofnij prawie wszystko; drzemka na 1 dzień, 3 lub tydzień
-• Grupy filtrują twoją sieć i mają własne tickle
+Ticklr jest gotowy na Androida 16.
+• Zaktualizowano dla Androida 16 — pełna zgodność z najnowszymi urządzeniami
+• Poprawki dla języków pisanych od prawej do lewej: strzałki i ikony wskazują teraz właściwy kierunek w językach arabskim, hebrajskim i urdu

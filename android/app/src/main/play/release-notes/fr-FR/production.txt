@@ -1,6 +1,3 @@
-Tes rappels fonctionnent enfin comme ils l'auraient toujours dû.
-• Écris à quelqu'un et Ticklr propose de marquer son tickle comme fait
-• Les rappels sont à nouveau fiables — Fait ou Reporter depuis la notification
-• La rédaction suggère qui contacter aujourd'hui
-• Annule presque tout ; reporte d'1 jour, 3 ou une semaine
-• Les groupes filtrent ton réseau et ont leurs propres tickles
+Ticklr est prêt pour Android 16.
+• Mise à jour pour Android 16 : compatibilité totale avec les appareils les plus récents
+• Amélioration des langues de droite à gauche : les flèches et les icônes pointent désormais dans le bon sens en arabe, hébreu et ourdou

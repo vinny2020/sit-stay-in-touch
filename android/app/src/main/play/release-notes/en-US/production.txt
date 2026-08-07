@@ -1,6 +1,3 @@
-Your reminders now work the way they always should have.
-• Text someone and Ticklr offers to mark their tickle done
-• Reminders are reliable again — Done or Snooze right from the notification
-• Compose suggests who's due today
-• Undo almost anything; snooze for 1 day, 3, or a week
-• Groups can filter your network and carry their own tickles
+Ticklr is ready for Android 16.
+• Updated for Android 16 — full compatibility with the newest devices
+• Polish for right-to-left languages: arrows and icons now point the right way in Arabic, Hebrew, and Urdu

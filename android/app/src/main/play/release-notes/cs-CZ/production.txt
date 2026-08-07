@@ -1,6 +1,3 @@
-Tvoje připomenutí konečně fungují tak, jak vždycky měla.
-• Napiš někomu a Ticklr nabídne označit tickle jako hotový
-• Připomenutí jsou zase spolehlivá — Hotovo nebo Odložit přímo z oznámení
-• Psaní zprávy napoví, s kým se dnes ozvat
-• Vrať zpět skoro cokoli; odlož o 1 den, 3 nebo týden
-• Skupiny filtrují tvou síť a mají vlastní tickle
+Ticklr je připraven na Android 16.
+• Aktualizováno pro Android 16 — plná kompatibilita s nejnovějšími zařízeními
+• Vylepšení pro jazyky psané zprava doleva: šipky a ikony nyní ukazují správným směrem v arabštině, hebrejštině a urdštině
