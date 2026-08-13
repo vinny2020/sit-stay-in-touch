@@ -9,6 +9,8 @@ jobs:
   build-and-publish:
     name: Build & Publish to Play Store
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # create the GitHub Release carrying the signed APK
 
     steps:
       - name: Checkout
@@ -120,6 +122,51 @@ jobs:
             -Pandroid.injected.signing.store.password=$KEYSTORE_PASSWORD \
             -Pandroid.injected.signing.key.alias=$KEY_ALIAS \
             -Pandroid.injected.signing.key.password=$KEY_PASSWORD
+
+      - name: Build signed APK for GitHub Release
+        # F-Droid's reproducible-build flow (Binaries: in fdroiddata) downloads
+        # this APK and verifies their from-source build matches it byte-for-byte,
+        # then publishes OUR dev-signed APK (TIC-101). The APK must come from the
+        # same commit/toolchain as the tag. Signing config is inherited from the
+        # env of the publish step via gradle properties, so re-pass them here.
+        working-directory: android
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
+          ./gradlew :app:assembleRelease \
+            -Pandroid.injected.signing.store.file=$(pwd)/app/release.keystore \
+            -Pandroid.injected.signing.store.password=$KEYSTORE_PASSWORD \
+            -Pandroid.injected.signing.key.alias=$KEY_ALIAS \
+            -Pandroid.injected.signing.key.password=$KEY_PASSWORD
+
+      - name: Attach APK to GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${GITHUB_REF#refs/tags/}"
+          VERSION_NAME="${{ steps.version.outputs.version_name }}"
+          TRACK="${{ steps.version.outputs.track }}"
+          APK="ticklr-v${VERSION_NAME}.apk"
+          cp android/app/build/outputs/apk/release/app-release.apk "$APK"
+
+          PRERELEASE_FLAG=""
+          if [ "$TRACK" != "production" ]; then
+            PRERELEASE_FLAG="--prerelease"
+          fi
+
+          NOTES_FILE="android/app/src/main/play/release-notes/en-US/${TRACK}.txt"
+          if [ -f "$NOTES_FILE" ]; then
+            NOTES_ARGS=(--notes-file "$NOTES_FILE")
+          else
+            NOTES_ARGS=(--notes "Android v${VERSION_NAME} (${TRACK})")
+          fi
+
+          gh release create "$TAG" "$APK" \
+            --title "Android v${VERSION_NAME} (${TRACK})" \
+            "${NOTES_ARGS[@]}" \
+            --verify-tag $PRERELEASE_FLAG
 
       - name: Clean up secrets
         if: always()

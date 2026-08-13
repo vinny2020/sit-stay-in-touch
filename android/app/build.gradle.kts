@@ -59,7 +59,11 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = true
-            signingConfig = signingConfigs.getByName("release")
+            // Only sign when credentials exist. Without them (F-Droid's builder,
+            // a fresh clone) assembleRelease produces an unsigned APK instead of
+            // failing on the missing keystore — F-Droid builds unsigned and
+            // verifies against our published signed APK (TIC-101).
+            signingConfig = signingConfigs.getByName("release").takeIf { it.storeFile != null }
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         debug {
