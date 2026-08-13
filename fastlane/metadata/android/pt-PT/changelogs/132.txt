@@ -1,3 +1,0 @@
-O Ticklr está pronto para o Android 16.
-• Atualizado para o Android 16 — compatibilidade total com os dispositivos mais recentes
-• Melhorias para idiomas da direita para a esquerda: as setas e os ícones apontam agora na direção certa em árabe, hebraico e urdu
