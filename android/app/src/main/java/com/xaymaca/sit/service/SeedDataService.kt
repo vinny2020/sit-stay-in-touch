@@ -10,7 +10,9 @@ import javax.inject.Singleton
 
 /**
  * DEBUG ONLY — loads test_contacts.csv from assets and imports it via LinkedInCSVParser.
- * Gated by BuildConfig.DEBUG so it is compiled out of release builds.
+ * The CSV lives in src/debug/assets so it is never packaged into release APKs (TIC-99);
+ * calling this in a release build would throw FileNotFoundException, but the only call
+ * site (Settings) is gated by BuildConfig.DEBUG.
  */
 @Singleton
 class SeedDataService @Inject constructor(
