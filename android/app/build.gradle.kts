@@ -46,6 +46,16 @@ android {
         }
     }
 
+    dependenciesInfo {
+        // AGP embeds a Google-encrypted dependency blob in the APK signing block
+        // ("SDKP"). It's encrypted with a random session key, which breaks
+        // reproducible builds, and F-Droid rejects opaque blobs anyway (TIC-101).
+        // The bundle copy stays: Play reads it for security alerts, and AABs
+        // don't need to be reproducible.
+        includeInApk = false
+        includeInBundle = true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = true
