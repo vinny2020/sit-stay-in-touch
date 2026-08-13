@@ -194,7 +194,10 @@ Tags select the version and Play track only; release notes come from checked-in 
 Edit `app/src/main/play/release-notes/en-US/production.txt` before a production tag, add
 localized sibling files when needed, then commit those files before tagging.
 See `~/Documents/SecondBrain/Projects/Ticklr/Release Tagging Guide.md` for tag conventions.
-`versionCode` is auto-computed as `100 + GITHUB_RUN_NUMBER`.
+`versionCode` and `versionName` are plain literals in `app/build.gradle.kts`,
+bumped by PR before tagging (`versionCode` +1 each release). CI verifies the tag
+matches `versionName` and fails if the bump PR hasn't landed. Keep them literals —
+F-Droid regexes the build file and cannot evaluate Gradle expressions (TIC-101).
 
 ## Sensitive Files — Never Commit
 

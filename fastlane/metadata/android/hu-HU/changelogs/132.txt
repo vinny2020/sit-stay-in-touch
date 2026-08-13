@@ -1,0 +1,3 @@
+A Ticklr készen áll az Android 16-ra.
+• Frissítve az Android 16-hoz — teljes kompatibilitás a legújabb készülékekkel
+• Finomítások a jobbról balra írt nyelvekhez: a nyilak és az ikonok mostantól a helyes irányba mutatnak arab, héber és urdu nyelven

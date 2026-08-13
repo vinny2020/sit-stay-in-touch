@@ -24,9 +24,11 @@ android {
         applicationId = "com.xaymaca.sit"
         minSdk = 26
         targetSdk = 36
-        // Allow GitHub Actions to override version code and name from the tag/run number
-        versionCode = project.findProperty("versionCode")?.toString()?.toInt() ?: 27
-        versionName = project.findProperty("versionName")?.toString() ?: "1.12.1"
+        // Plain literals, bumped by PR before each release tag — F-Droid's checkupdates
+        // regexes this file at the tagged commit and cannot evaluate Gradle expressions.
+        // CI reads these values too; the release tag must match versionName (TIC-101).
+        versionCode = 132
+        versionName = "1.12.1"
         // "iw" is the legacy ISO code for Hebrew. java.util.Locale normalizes
         // "he" -> "iw", so the runtime resolves Hebrew under iw and won't match the
         // he-tagged resources — values-iw mirrors values-he to cover it. Keep both.
@@ -285,53 +287,5 @@ tasks.register("screenshotTeardown") {
                 .inheritIO().start().waitFor()
         }
         println("✅  Demo mode exited. Status bar restored.")
-    }
-}
-
-// ---------------------------------------------------------------------------
-// Release tagging — auto-creates an annotated git tag after a signed release
-// build.
-// ---------------------------------------------------------------------------
-tasks.register("tagRelease") {
-    group = "release"
-    description = "Creates and pushes an annotated git tag for the current release build"
-
-    mustRunAfter("assembleRelease", "bundleRelease")
-
-    doLast {
-        val versionName = android.defaultConfig.versionName
-        val versionCode = android.defaultConfig.versionCode
-        val tagName = "android/v$versionName-$versionCode"
-        val message = "Android release $versionName (versionCode $versionCode)"
-
-        fun git(vararg args: String): String {
-            val process = ProcessBuilder(listOf("git") + args.toList())
-                .directory(rootProject.projectDir)
-                .redirectErrorStream(true)
-                .start()
-            val output = process.inputStream.bufferedReader().readText().trim()
-            process.waitFor()
-            return output
-        }
-
-        // Warn if working tree is dirty but don't block
-        val status = git("status", "--porcelain")
-        if (status.isNotEmpty()) {
-            println("⚠️  Working tree has uncommitted changes — tagging anyway.")
-        }
-
-        // Check if tag already exists
-        val existing = git("tag", "-l", tagName)
-        if (existing == tagName) {
-            println("⚠️  Tag $tagName already exists — skipping.")
-            return@doLast
-        }
-
-        git("tag", "-a", tagName, "-m", message)
-        git("push", "origin", tagName)
-
-        println("")
-        println("🏷️  Tagged and pushed: $tagName")
-        println("    $message")
     }
 }

@@ -42,16 +42,32 @@ jobs:
             VERSION_NAME="$VERSION"
           fi
 
-          # SAFE INTEGER VERSION CODE
-          # Current highest in Play Store is 25. 
-          # 100 + GITHUB_RUN_NUMBER will start at 101, 102...
-          # This is a safe 32-bit integer.
-          VCODE=$((100 + GITHUB_RUN_NUMBER))
-
           echo "track=$TRACK"           >> $GITHUB_OUTPUT
           echo "version_name=$VERSION_NAME" >> $GITHUB_OUTPUT
-          echo "version_code=$VCODE" >> $GITHUB_OUTPUT
-          echo "▸ Version: $VERSION_NAME | Track: $TRACK | Code: $VCODE"
+          echo "▸ Version: $VERSION_NAME | Track: $TRACK"
+
+      - name: Verify tag matches checked-in version
+        # versionCode/versionName are plain literals in build.gradle.kts, bumped
+        # by PR before tagging (F-Droid regexes the build file at the tagged
+        # commit and cannot evaluate Gradle expressions — TIC-101). A tag pushed
+        # without the version-bump PR landing first fails here, before any build.
+        id: gradle_version
+        run: |
+          GRADLE_FILE=android/app/build.gradle.kts
+          GRADLE_NAME=$(grep -oE 'versionName = "[^"]+"' "$GRADLE_FILE" | head -1 | cut -d'"' -f2)
+          GRADLE_CODE=$(grep -oE 'versionCode = [0-9]+' "$GRADLE_FILE" | head -1 | grep -oE '[0-9]+')
+
+          if [ -z "$GRADLE_NAME" ] || [ -z "$GRADLE_CODE" ]; then
+            echo "::error::Could not extract literal versionName/versionCode from $GRADLE_FILE."
+            exit 1
+          fi
+          if [ "$GRADLE_NAME" != "${{ steps.version.outputs.version_name }}" ]; then
+            echo "::error::Tag says ${{ steps.version.outputs.version_name }} but $GRADLE_FILE says $GRADLE_NAME. Land the version-bump PR before tagging."
+            exit 1
+          fi
+
+          echo "version_code=$GRADLE_CODE" >> $GITHUB_OUTPUT
+          echo "▸ build.gradle.kts: versionName=$GRADLE_NAME versionCode=$GRADLE_CODE"
 
       - name: Validate checked-in release notes
         # Release notes are sourced from checked-in files:
@@ -100,8 +116,6 @@ jobs:
         run: |
           ./gradlew publishReleaseBundle \
             -PplayTrack=${{ steps.version.outputs.track }} \
-            -PversionName=${{ steps.version.outputs.version_name }} \
-            -PversionCode=${{ steps.version.outputs.version_code }} \
             -Pandroid.injected.signing.store.file=$(pwd)/app/release.keystore \
             -Pandroid.injected.signing.store.password=$KEYSTORE_PASSWORD \
             -Pandroid.injected.signing.key.alias=$KEY_ALIAS \
@@ -117,5 +131,5 @@ jobs:
         run: |
           echo "### ✅ Android build shipped" >> $GITHUB_STEP_SUMMARY
           echo "- **Version:** ${{ steps.version.outputs.version_name }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Build (versionCode):** ${{ steps.version.outputs.version_code }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Build (versionCode):** ${{ steps.gradle_version.outputs.version_code }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Track:** ${{ steps.version.outputs.track }}" >> $GITHUB_STEP_SUMMARY

@@ -32,15 +32,19 @@ git log --oneline "$(git tag -l 'android/v*' | sort -V | tail -1)"..HEAD   # unr
   (`defaultConfig.versionName`).
 
 **Tag format & what CI derives:**
-| Tag | Track | versionName | versionCode |
-|---|---|---|---|
-| `android/v1.9.0-production` | production | 1.9.0 | `100 + run#` (auto) |
-| `android/v1.9.0-beta` | beta | 1.9.0 | auto |
-| `android/v1.9.0-alpha` | alpha | 1.9.0 | auto |
-| `android/v1.9.0` (no suffix) | internal | 1.9.0 | auto |
+| Tag | Track |
+|---|---|
+| `android/v1.9.0-production` | production |
+| `android/v1.9.0-beta` | beta |
+| `android/v1.9.0-alpha` | alpha |
+| `android/v1.9.0` (no suffix) | internal |
 
-`versionCode` is **always** `100 + GITHUB_RUN_NUMBER` — never set by hand. CI
-parses `versionName`/track from the tag and passes them to Gradle.
+`versionName` and `versionCode` are **plain literals** in
+`android/app/build.gradle.kts`, bumped in the version-bump PR (Step 3). The tag
+selects the track; CI verifies the tag's version equals the checked-in
+`versionName` and fails before building if the bump PR hasn't landed. Keep both
+values literals — F-Droid regexes the build file at the tagged commit and cannot
+evaluate Gradle expressions (TIC-101).
 
 ## Step 2 — Release notes
 
@@ -50,8 +54,10 @@ all 21 locales, validate ≤500 chars). Don't ship the previous release's notes.
 
 ## Step 3 — Version bump
 
-Bump `defaultConfig.versionName` in `android/app/build.gradle.kts` to the new
-version (CI derives the shipped value from the tag, but keep the repo honest).
+In `android/app/build.gradle.kts` set `defaultConfig.versionName` to the new
+version and increment `defaultConfig.versionCode` by 1. Both must stay plain
+integer/string literals. CI ships exactly these values — a tag that doesn't
+match `versionName` fails the workflow.
 
 ## Step 4 — Land prep on main
 
@@ -107,7 +113,7 @@ go straight to the live listing.
 > "Edit has been deleted" as a blocker for the real publish.
 
 ## Quick reference — gotchas
-- Tag drives everything; `versionCode = 100 + run#`, never manual.
+- Tag selects the track; `versionName`/`versionCode` are checked-in literals — bump both in the prep PR or CI fails the tag.
 - 500-char release-note limit per locale (chars, not bytes) — CI fails the build otherwise.
 - `publishReleaseBundle` = bundle + notes; **listings are separate**.
 - Hebrew uses `iw-IL` ONLY — shipping `he-IL` too fails the commit as a duplicate locale.
