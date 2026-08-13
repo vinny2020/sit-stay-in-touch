@@ -53,6 +53,12 @@ What the workflow does:
 5. Runs `./gradlew publishReleaseBundle` — builds the signed AAB and publishes
    it straight to the Play track. **A production tag publishes to production
    with no further confirmation step.**
+6. Builds the signed release **APK** and attaches it to a GitHub Release named
+   after the tag (`ticklr-v<x.y.z>.apk`, non-production tracks marked
+   pre-release). F-Droid's reproducible-build flow (`Binaries:` in fdroiddata)
+   downloads this APK, verifies their from-source build matches it, and
+   publishes our dev-signed APK — so this artifact must exist for every
+   production release (TIC-101).
 
 **Scope caveat:** `publishReleaseBundle` ships the bundle + release notes only.
 The store **listing** (title, descriptions, screenshots, contact/privacy URLs)
