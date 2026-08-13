@@ -27,8 +27,8 @@ android {
         // Plain literals, bumped by PR before each release tag — F-Droid's checkupdates
         // regexes this file at the tagged commit and cannot evaluate Gradle expressions.
         // CI reads these values too; the release tag must match versionName (TIC-101).
-        versionCode = 132
-        versionName = "1.12.1"
+        versionCode = 133
+        versionName = "1.12.2"
         // "iw" is the legacy ISO code for Hebrew. java.util.Locale normalizes
         // "he" -> "iw", so the runtime resolves Hebrew under iw and won't match the
         // he-tagged resources — values-iw mirrors values-he to cover it. Keep both.
