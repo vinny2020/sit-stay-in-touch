@@ -12,8 +12,9 @@ AutoName: Ticklr
 
 RepoType: git
 Repo: https://github.com/vinny2020/ticklr.git
-Binaries: 
+Binaries:
   https://github.com/vinny2020/ticklr/releases/download/android/v%v-production/ticklr-v%v.apk
+AllowedAPKSigningKeys: 31f8074d5334b02df4a5a8d9862c33a46694a99442adf08f360e9a4fd7fce465
 
 Builds:
   - versionName: 1.12.2
