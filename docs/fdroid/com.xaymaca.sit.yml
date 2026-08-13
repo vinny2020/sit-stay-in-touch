@@ -1,0 +1,33 @@
+Categories:
+  - Contact
+  - Phone & SMS
+License: Apache-2.0
+AuthorName: Vincent Stoessel
+WebSite: https://ticklr.org
+SourceCode: https://github.com/vinny2020/ticklr
+IssueTracker: https://github.com/vinny2020/ticklr/issues
+Changelog: https://github.com/vinny2020/ticklr/releases
+
+AutoName: Ticklr
+
+RepoType: git
+Repo: https://github.com/vinny2020/ticklr.git
+Binaries: 
+  https://github.com/vinny2020/ticklr/releases/download/android/v%v-production/ticklr-v%v.apk
+
+Builds:
+  - versionName: 1.12.2
+    versionCode: 133
+    commit: android/v1.12.2-production
+    subdir: android/app
+    gradle:
+      - yes
+    scandelete:
+      - android/app/src/debug
+      - android/app/src/test
+      - assets/seed
+
+AutoUpdateMode: Version
+UpdateCheckMode: Tags ^android/v[0-9.]+-production$
+CurrentVersion: 1.12.2
+CurrentVersionCode: 133
