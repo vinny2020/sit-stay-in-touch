@@ -1,0 +1,3 @@
+Ticklr este pregătit pentru Android 16.
+• Actualizat pentru Android 16 — compatibilitate deplină cu cele mai noi dispozitive
+• Îmbunătățiri pentru limbile scrise de la dreapta la stânga: săgețile și pictogramele indică acum direcția corectă în arabă, ebraică și urdu

@@ -1,0 +1,3 @@
+Ticklr je připraven na Android 16.
+• Aktualizováno pro Android 16 — plná kompatibilita s nejnovějšími zařízeními
+• Vylepšení pro jazyky psané zprava doleva: šipky a ikony nyní ukazují správným směrem v arabštině, hebrejštině a urdštině

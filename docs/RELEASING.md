@@ -36,8 +36,13 @@ The tag selects version and track only — **tag annotations are ignored**.
 What the workflow does:
 
 1. Parses version name + track from the tag.
-2. Computes `versionCode = 100 + GITHUB_RUN_NUMBER` (monotonic; do not set it
-   manually).
+2. Verifies the tag's version matches the `versionName` literal in
+   `android/app/build.gradle.kts` and reads `versionCode` from the same file.
+   Both are **plain literals bumped by PR before tagging** (the version-bump
+   PR increments `versionCode` by 1 and sets the new `versionName`). They must
+   be regex-able literals because F-Droid parses the build file at the tagged
+   commit and cannot evaluate Gradle expressions (TIC-101). Tagging without
+   landing the bump PR fails the workflow before anything builds or uploads.
 3. **Validates checked-in release notes** for the tagged track: every
    `android/app/src/main/play/release-notes/<locale>/<track>.txt` must be
    ≤ 500 *characters* (counted with `wc -m` in a UTF-8 locale, not bytes).
