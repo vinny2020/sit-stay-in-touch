@@ -1,4 +1,0 @@
-Rafforzamento della privacy sotto il cofano.
-• Ogni versione ora può essere verificata come compilata esattamente dal codice sorgente pubblico di Ticklr
-• Il pacchetto dell'app non include più metadati delle dipendenze cifrati
-• Rimossi dati di test residui dal pacchetto dell'app

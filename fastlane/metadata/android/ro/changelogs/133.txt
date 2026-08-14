@@ -1,4 +1,0 @@
-Consolidarea confidențialității în culise.
-• Fiecare versiune poate fi acum verificată ca fiind construită exact din codul sursă public Ticklr
-• Pachetul aplicației nu mai include metadate criptate ale dependențelor
-• Am eliminat datele de test rămase din pachetul aplicației

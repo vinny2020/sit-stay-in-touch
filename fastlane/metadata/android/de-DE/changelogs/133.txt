@@ -1,4 +1,0 @@
-Datenschutz-Härtung unter der Haube.
-• Jede Version lässt sich jetzt als exakt aus Ticklrs öffentlichem Quellcode gebaut verifizieren
-• Das App-Paket enthält keine verschlüsselten Abhängigkeits-Metadaten mehr
-• Übrig gebliebene Testdaten aus dem App-Paket entfernt

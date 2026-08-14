@@ -1,4 +1,0 @@
-Wzmocnienie prywatności pod maską.
-• Każde wydanie można teraz zweryfikować jako zbudowane dokładnie z publicznego kodu źródłowego Ticklr
-• Pakiet aplikacji nie zawiera już zaszyfrowanych metadanych zależności
-• Usunięto pozostałe dane testowe z pakietu aplikacji

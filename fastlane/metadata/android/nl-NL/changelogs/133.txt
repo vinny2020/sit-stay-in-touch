@@ -1,4 +1,0 @@
-Privacyversterking onder de motorkap.
-• Elke release is nu verifieerbaar als exact gebouwd vanuit de publieke broncode van Ticklr
-• Het app-pakket bevat geen versleutelde afhankelijkheidsmetadata meer
-• Overgebleven testdata uit het app-pakket verwijderd
