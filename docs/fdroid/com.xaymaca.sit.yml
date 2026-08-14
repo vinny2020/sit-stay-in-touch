@@ -19,7 +19,7 @@ AllowedAPKSigningKeys: 31f8074d5334b02df4a5a8d9862c33a46694a99442adf08f360e9a4fd
 Builds:
   - versionName: 1.12.2
     versionCode: 133
-    commit: android/v1.12.2-production
+    commit: 2bdd43f767b7fc6458d464c7bfacc0fbe344e490
     subdir: android/app
     gradle:
       - yes
