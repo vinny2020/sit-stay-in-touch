@@ -6,13 +6,9 @@ A privacy-first personal network manager for iOS and Android. Build your contact
 
 _iOS shown — Android UI mirrors with platform-native treatments._
 
-| Onboarding | Network | Import |
-|:----------:|:-------:|:------:|
-| <img src="docs/screenshots/05-compose.png" width="220"/> | <img src="docs/screenshots/01-network-list.png" width="220"/> | <img src="docs/screenshots/02-contact-detail.png" width="220"/> |
-
-| New Tickle | New Group | Groups |
-|:----------:|:---------:|:------:|
-| <img src="docs/screenshots/04-tickle-edit.png" width="220"/> | <img src="docs/screenshots/06-launch-screen.png" width="220"/> | <img src="docs/screenshots/07-settings.png" width="220"/> |
+| Tickle | Network | Compose | 100% on device |
+|:------:|:-------:|:-------:|:--------------:|
+| <img src="docs/screenshots/tickle.png" width="200"/> | <img src="docs/screenshots/network.png" width="200"/> | <img src="docs/screenshots/compose.png" width="200"/> | <img src="docs/screenshots/privacy.png" width="200"/> |
 
 ## Repository Structure
 
