@@ -1,4 +1,0 @@
-Reforço de privacidade nos bastidores.
-• Cada versão pode agora ser verificada como compilada exatamente a partir do código-fonte público do Ticklr
-• O pacote da aplicação já não inclui metadados de dependências encriptados
-• Removidos dados de teste residuais do pacote da aplicação

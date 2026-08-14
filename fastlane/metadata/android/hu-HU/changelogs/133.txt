@@ -1,4 +1,0 @@
-Adatvédelmi megerősítés a motorháztető alatt.
-• Mostantól minden kiadás ellenőrizhető, hogy pontosan a Ticklr nyilvános forráskódjából készült
-• Az alkalmazáscsomag már nem tartalmaz titkosított függőségi metaadatokat
-• Eltávolítottuk a visszamaradt tesztadatokat az alkalmazáscsomagból

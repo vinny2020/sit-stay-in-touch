@@ -1,4 +1,0 @@
-Posílení soukromí pod kapotou.
-• Každé vydání lze nyní ověřit, že bylo sestaveno přesně z veřejného zdrojového kódu Ticklr
-• Balíček aplikace již neobsahuje šifrovaná metadata závislostí
-• Odstraněna zbylá testovací data z balíčku aplikace

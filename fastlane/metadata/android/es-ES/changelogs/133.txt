@@ -1,4 +1,0 @@
-Refuerzo de privacidad bajo el capó.
-• Cada versión ahora puede verificarse como compilada exactamente desde el código fuente público de Ticklr
-• El paquete de la app ya no incluye metadatos de dependencias cifrados
-• Eliminados datos de prueba residuales del paquete de la app

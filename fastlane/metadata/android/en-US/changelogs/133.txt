@@ -1,4 +1,0 @@
-Privacy hardening under the hood.
-• Every release can now be verified as built exactly from Ticklr's public source code
-• The app package no longer includes encrypted dependency metadata
-• Removed leftover test data from the app package

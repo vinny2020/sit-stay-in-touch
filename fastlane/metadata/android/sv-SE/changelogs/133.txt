@@ -1,4 +1,0 @@
-Integritetsförstärkning under huven.
-• Varje utgåva kan nu verifieras som byggd exakt från Ticklrs publika källkod
-• Appaketet innehåller inte längre krypterad beroendemetadata
-• Kvarblivna testdata har tagits bort från appaketet

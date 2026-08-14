@@ -1,4 +1,0 @@
-Renforcement de la confidentialité sous le capot.
-• Chaque version peut désormais être vérifiée comme compilée exactement depuis le code source public de Ticklr
-• Le paquet de l'application n'inclut plus de métadonnées de dépendances chiffrées
-• Suppression de données de test résiduelles du paquet de l'application
