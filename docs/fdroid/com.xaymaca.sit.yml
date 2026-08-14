@@ -12,21 +12,19 @@ AutoName: Ticklr
 
 RepoType: git
 Repo: https://github.com/vinny2020/ticklr.git
-Binaries:
+Binaries: 
   https://github.com/vinny2020/ticklr/releases/download/android/v%v-production/ticklr-v%v.apk
-AllowedAPKSigningKeys: 31f8074d5334b02df4a5a8d9862c33a46694a99442adf08f360e9a4fd7fce465
 
 Builds:
   - versionName: 1.12.2
     versionCode: 133
-    commit: android/v1.12.2-production
+    commit: 2bdd43f767b7fc6458d464c7bfacc0fbe344e490
     subdir: android/app
     gradle:
       - yes
-    scandelete:
-      - android/app/src/debug
-      - android/app/src/test
-      - assets/seed
+    prebuild: sed -i -e '/foojay-resolver/d' ../settings.gradle.kts
+
+AllowedAPKSigningKeys: 31f8074d5334b02df4a5a8d9862c33a46694a99442adf08f360e9a4fd7fce465
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags ^android/v[0-9.]+-production$
