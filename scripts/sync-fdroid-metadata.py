@@ -50,7 +50,7 @@ PLAY_ROOT = Path("android/app/src/main/play")
 LISTINGS_DIR = PLAY_ROOT / "listings"
 NOTES_DIR = PLAY_ROOT / "release-notes"
 GRADLE_FILE = Path("android/app/build.gradle.kts")
-ICON_SRC = LISTINGS_DIR / "en-US" / "graphics" / "icon.png"
+ICON_SRC = LISTINGS_DIR / "en-US" / "graphics" / "icon" / "icon.png"
 
 OUTPUT_DIR = Path("fastlane/metadata/android")
 
